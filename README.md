@@ -13,14 +13,13 @@
       --text: #e6eef8;
     }
 
-    /* Reset básico */
     *{box-sizing:border-box;}
     html,body{
       height:100%;
       margin:0;
       padding:0;
       font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-      overflow-x:hidden; /* bloqueia scroll horizontal */
+      overflow-x:hidden;
       background: linear-gradient(135deg, #000000 0%, #0b1226 45%, #081129 100%);
       color: var(--text);
       -webkit-font-smoothing:antialiased;
@@ -121,7 +120,6 @@
     .card{background:var(--glass);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);}
     .chart-canvas{width:100%;height:120px;}
 
-    /* Responsivo para celular */
     @media (max-width:880px){
       .container{grid-template-columns:1fr;}
       .sidebar{order:2;}
@@ -174,6 +172,15 @@
         <h3 style="margin:0 0 8px 0">Resumo rápido</h3>
         <p style="margin:0 0 12px 0;color:rgba(230,238,248,0.75);font-size:13px">Veja sua tendência dos últimos lançamentos.</p>
         <canvas id="spark" class="chart-canvas"></canvas>
+      </div>
+
+      <!-- BLOCO PIX -->
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <small style="display:block;font-size:12px;color:rgba(230,238,248,0.75)">PIX</small>
+          <div id="pixKey" style="font-weight:700;font-size:15px">63993128374</div>
+        </div>
+        <button class="btn" onclick="copyPix()">Copiar</button>
       </div>
 
       <div class="card" style="display:flex;justify-content:space-between;align-items:center">
@@ -291,6 +298,13 @@
       ctx.strokeStyle = grad; ctx.stroke();
       ctx.lineTo(w-4,h); ctx.lineTo(4,h); ctx.closePath();
       ctx.fillStyle='rgba(124,58,237,0.06)'; ctx.fill();
+    }
+
+    function copyPix() {
+      const pix = document.getElementById("pixKey").innerText;
+      navigator.clipboard.writeText(pix).then(() => {
+        alert("Chave Pix copiada: " + pix);
+      });
     }
 
     update();
